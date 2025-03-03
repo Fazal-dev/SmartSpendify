@@ -39,6 +39,7 @@
         "react-day-picker": "^8.10.1",
         "react-toastify": "^11.0.3",
         "recharts": "^2.15.1",
+        "swapy": "^1.0.5",
         "tailwind-merge": "^3.0.1",
         "tailwindcss-animate": "^1.0.7"
     }

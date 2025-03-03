@@ -5,7 +5,7 @@ import ExpenseTrendChart from "@/Components/charts/ExpenseTrendChart";
 import SummaryCard from "@/Components/SummaryCard";
 import CategoryWiseExpenseChart from "@/Components/charts/CategoryWiseExpenseChart";
 import { CountUp } from "countup.js";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import {
     Table,
@@ -15,6 +15,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import { createSwapy } from "swapy";
 
 export default function Dashboard({
     totalTodayExpenses,
@@ -44,6 +45,20 @@ export default function Dashboard({
             id: "saving-expenses",
         },
     ];
+
+    const swapy = useRef(null);
+    const container = useRef(null);
+
+    useEffect(() => {
+        if (container.current) {
+            swapy.current = createSwapy(container.current);
+            swapy.current.onSwap((event) => {});
+        }
+
+        return () => {
+            swapy.current?.destroy();
+        };
+    }, []);
 
     useEffect(() => {
         data.forEach((item) => {
@@ -91,27 +106,42 @@ export default function Dashboard({
                             </div>
 
                             {/* charts section */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2  gap-4 py-4">
-                                <div className="p-2 bg-white rounded-xl shadow-md">
-                                    <h3 className="text-lg font-semibold">
-                                        Expenses Trend
-                                    </h3>
-                                    <div className="mt-4 bg-gray-100 rounded-md flex items-center justify-center">
-                                        <ExpenseTrendChart
-                                            expenseData={expensesMonthlyTrend}
-                                        />
+                            <div
+                                ref={container}
+                                className="grid grid-cols-1 sm:grid-cols-2  gap-4 py-4"
+                            >
+                                <div data-swapy-slot="a">
+                                    <div
+                                        data-swapy-item="a"
+                                        className="p-4 bg-white rounded-xl shadow-md"
+                                    >
+                                        <h3 className="text-lg font-semibold">
+                                            Expenses Trend
+                                        </h3>
+                                        <div className="mt-4 bg-gray-100 rounded-md flex items-center justify-center">
+                                            <ExpenseTrendChart
+                                                expenseData={
+                                                    expensesMonthlyTrend
+                                                }
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="p-4 bg-white rounded-xl shadow-md col-span-1">
-                                    <h3 className="text-lg font-semibold">
-                                        Category Distribution
-                                    </h3>
-                                    <div className="mt-4  bg-gray-100 rounded-md flex items-center justify-center">
-                                        <CategoryWiseExpenseChart
-                                            CategoryWiseExpense={
-                                                categoryWiseExpenses
-                                            }
-                                        />
+                                <div data-swapy-slot="b" className="">
+                                    <div
+                                        data-swapy-item="b"
+                                        className="p-4 bg-white rounded-xl shadow-md col-span-1"
+                                    >
+                                        <h3 className="text-lg font-semibold">
+                                            Category Distribution
+                                        </h3>
+                                        <div className="mt-4  bg-gray-100 rounded-md flex items-center justify-center">
+                                            <CategoryWiseExpenseChart
+                                                CategoryWiseExpense={
+                                                    categoryWiseExpenses
+                                                }
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
