@@ -2,8 +2,29 @@ import { Button } from "@/Components/ui/button";
 import { ArrowRight, BarChart2, PiggyBank, Zap } from "lucide-react";
 import { Head, Link } from "@inertiajs/react";
 import React from "react";
+import { FeaturedCard } from "@/Components/FeaturedCard";
 
 export default function Landing({ auth }) {
+    const features = [
+        {
+            title: "Visual Insights",
+            icon: <BarChart2 className="h-5 w-5 text-black dark:text-white" />,
+            description:
+                "See your spending patterns with beautiful charts and actionable insights",
+        },
+        {
+            title: "Smart Budgeting",
+            icon: <PiggyBank className="h-5 w-5 text-black dark:text-white" />,
+            description:
+                "Create personalized budgets and receive gentle reminders to stay on track.",
+        },
+        {
+            title: "  Effortless Tracking",
+            icon: <Zap className="h-5 w-5 text-black dark:text-white" />,
+            description:
+                "Quick expense entry with automatic categorization and receipt scanning.",
+        },
+    ];
     return (
         <>
             <Head title="Welcome" />
@@ -28,11 +49,13 @@ export default function Landing({ auth }) {
                             {/* Nav buttons */}
                             <div className="flex items-center gap-4">
                                 {auth.user ? (
-                                    <Link
-                                        href={route("dashboard")}
-                                        className="px-6 py-3 rounded-md bg-black text-white text-lg font-semibold transition hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-600"
-                                    >
-                                        Dashboard
+                                    <Link href={route("dashboard")}>
+                                        <Button
+                                            variant="ghost"
+                                            className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
+                                        >
+                                            Dashboard
+                                        </Button>
                                     </Link>
                                 ) : (
                                     <>
@@ -108,51 +131,12 @@ export default function Landing({ auth }) {
                         {/* Features section */}
                         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-20">
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                {/* Feature 1 */}
-                                <div className="group relative bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-                                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-900 mb-4">
-                                        <BarChart2 className="h-5 w-5 text-black dark:text-white" />
-                                    </div>
-                                    <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
-                                        Visual Insights
-                                    </h3>
-                                    <p className="text-gray-600 dark:text-gray-400">
-                                        See your spending patterns with
-                                        beautiful charts and actionable
-                                        insights.
-                                    </p>
-                                    <div className="absolute inset-0 border border-black/0 dark:border-white/0 rounded-xl group-hover:border-black/10 dark:group-hover:border-white/10 group-hover:scale-[1.02] transition-all duration-300"></div>
-                                </div>
-
-                                {/* Feature 2 */}
-                                <div className="group relative bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-                                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-900 mb-4">
-                                        <PiggyBank className="h-5 w-5 text-black dark:text-white" />
-                                    </div>
-                                    <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
-                                        Smart Budgeting
-                                    </h3>
-                                    <p className="text-gray-600 dark:text-gray-400">
-                                        Create personalized budgets and receive
-                                        gentle reminders to stay on track.
-                                    </p>
-                                    <div className="absolute inset-0 border border-black/0 dark:border-white/0 rounded-xl group-hover:border-black/10 dark:group-hover:border-white/10 group-hover:scale-[1.02] transition-all duration-300"></div>
-                                </div>
-
-                                {/* Feature 3 */}
-                                <div className="group relative bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-                                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-900 mb-4">
-                                        <Zap className="h-5 w-5 text-black dark:text-white" />
-                                    </div>
-                                    <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
-                                        Effortless Tracking
-                                    </h3>
-                                    <p className="text-gray-600 dark:text-gray-400">
-                                        Quick expense entry with automatic
-                                        categorization and receipt scanning.
-                                    </p>
-                                    <div className="absolute inset-0 border border-black/0 dark:border-white/0 rounded-xl group-hover:border-black/10 dark:group-hover:border-white/10 group-hover:scale-[1.02] transition-all duration-300"></div>
-                                </div>
+                                {features.map((feature, index) => (
+                                    <FeaturedCard
+                                        key={index}
+                                        feature={feature}
+                                    />
+                                ))}
                             </div>
                         </div>
                     </div>
