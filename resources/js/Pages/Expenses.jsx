@@ -338,7 +338,7 @@ export default function Expenses({ expenses, totalAmount, categories, flash }) {
                         <div className=" p-4 ">
                             <PrimaryButton onClick={openAddModal}>
                                 <Plus className="mr-2" />
-                                Add Expenses
+                                New Expense
                             </PrimaryButton>
                         </div>
                     </div>

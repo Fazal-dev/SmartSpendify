@@ -1,4 +1,5 @@
 import { Button } from "@/Components/ui/button";
+import { Link } from "@inertiajs/react";
 import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
@@ -24,13 +25,16 @@ export default function Hero() {
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center">
-                <Button
-                    size="lg"
-                    className="bg-black dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-black shadow-lg hover:shadow-xl transition-all group"
-                >
-                    Start tracking for free
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                <Link href={route("register")}>
+                    <Button
+                        size="lg"
+                        className="bg-black dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-black shadow-lg hover:shadow-xl transition-all group"
+                    >
+                        Start tracking for free
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                </Link>
+
                 <Button
                     size="lg"
                     variant="outline"
