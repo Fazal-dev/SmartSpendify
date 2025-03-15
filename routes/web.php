@@ -15,6 +15,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/voice', function () {
+    return Inertia::render('Voice');
+});
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashbordController::class, 'index'])->name('dashboard');
