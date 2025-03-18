@@ -252,9 +252,7 @@ export default function ExpenseModal({
                                     className="mt-4"
                                     disabled={processing}
                                 >
-                                    {mode === "add"
-                                        ? "New Expense"
-                                        : "Update Expense"}
+                                    {mode === "add" ? "New Expense" : "Update"}
                                 </PrimaryButton>
                             </div>
                         </div>
