@@ -31,7 +31,7 @@ export default function ExpenseModal({
     record,
     categories,
 }) {
-    const { data, setData, post, put, processing, reset, errors, clearErrors } =
+    const { data, setData, post, put, processing, errors, clearErrors } =
         useForm({
             date: format(new Date(), "yyyy-MM-dd"),
             description: "",
@@ -235,16 +235,6 @@ export default function ExpenseModal({
                     <div className="p-4 sm:p-6 lg:p-4">
                         <div className="grid grid-cols-2">
                             <div className="">
-                                <PrimaryButton
-                                    type="submit"
-                                    aschild="true"
-                                    className="mt-4"
-                                    disabled={processing}
-                                >
-                                    {mode === "add" ? "Add" : "Update"}
-                                </PrimaryButton>
-                            </div>
-                            <div className="text-right">
                                 <DangerButton
                                     type="button"
                                     aschild="true"
@@ -254,6 +244,18 @@ export default function ExpenseModal({
                                     <X size={16} className="mr-3" />
                                     Cancel
                                 </DangerButton>
+                            </div>
+                            <div className="text-right">
+                                <PrimaryButton
+                                    type="submit"
+                                    aschild="true"
+                                    className="mt-4"
+                                    disabled={processing}
+                                >
+                                    {mode === "add"
+                                        ? "New Expense"
+                                        : "Update Expense"}
+                                </PrimaryButton>
                             </div>
                         </div>
                     </div>
