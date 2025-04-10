@@ -18,6 +18,9 @@ Route::get('/', function () {
 Route::get('/voice', function () {
     return Inertia::render('Voice');
 });
+Route::get('/aiva', function () {
+    return Inertia::render('Chat');
+})->name("aiva");
 
 Route::middleware('auth')->group(function () {
 
