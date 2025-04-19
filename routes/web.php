@@ -18,9 +18,7 @@ Route::get('/', function () {
 Route::get('/voice', function () {
     return Inertia::render('Voice');
 });
-Route::get('/aiva', function () {
-    return Inertia::render('Chat');
-})->name("aiva");
+
 
 Route::middleware('auth')->group(function () {
 
@@ -33,6 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/exportPdf', [ExpenseController::class, 'exportPdf'])->name("expenses.export");
 
     Route::resource('budget', BudgetController::class)->only(['store']);
+
+    Route::get('/aiva', function () {
+        return Inertia::render('Chat');
+    })->name("aiva");
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

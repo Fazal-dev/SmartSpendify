@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { SendIcon, Rocket, Sparkles, Bot, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -109,9 +108,9 @@ const ChatUI = ({
                         AI Assistant
                     </h3>
                 </div>
-                <div className="text-sm px-2 py-1 rounded-full bg-zinc-800 text-zinc-400">
+                {/* <div className="text-sm px-2 py-1 rounded-full bg-zinc-800 text-zinc-400">
                     {messages.length} messages
-                </div>
+                </div> */}
             </div>
 
             {/* Chat Messages */}
