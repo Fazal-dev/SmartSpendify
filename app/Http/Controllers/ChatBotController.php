@@ -11,7 +11,7 @@ class ChatBotController extends Controller
     {
         $response = Http::withHeaders([
             'Content-Type' => 'application/json'
-        ])->post('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' . config('gemini.api_key'), [
+        ])->post(config('gemini.base_url') . '?key=' . config('gemini.api_key'), [
             'contents' => [
                 [
                     'parts' => [
