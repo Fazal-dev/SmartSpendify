@@ -1,28 +1,25 @@
 import { Head } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import ChatUI from "@/Components/ChatUI";
+import axios from "axios";
 
 export default function Chat() {
-    const handleSendMessage = async (message) => {
-        // Simulate network delay
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+    const getResponse = async (userMessage) => {
+        try {
+            const response = await axios.post("/chat", {
+                message: userMessage,
+            });
 
-        // Example responses based on user input
-        if (
-            message.toLowerCase().includes("hello") ||
-            message.toLowerCase().includes("hi")
-        ) {
-            return "Hello there! How can I help you today?";
-        } else if (message.toLowerCase().includes("help")) {
-            return "I'm here to help! You can ask me about various topics.";
-        } else if (
-            message.toLowerCase().includes("thanks") ||
-            message.toLowerCase().includes("thank you")
-        ) {
-            return "You're welcome! Is there anything else you need?";
-        } else {
-            return `I received your message: "${message}". How can I assist you further?`;
+            // Assuming API returns { reply: "some text" }
+            return response.data.message;
+        } catch (error) {
+            console.error("API error:", error);
+            return "Sorry, something went wrong. Please try again.";
         }
+    };
+    const handleSendMessage = async (message) => {
+        let response = await getResponse(message);
+        return response;
     };
     return (
         <AuthenticatedLayout

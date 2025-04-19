@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\ChatBotController;
 use App\Http\Controllers\DashbordController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProfileController;
@@ -23,6 +24,7 @@ Route::get('/voice', function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashbordController::class, 'index'])->name('dashboard');
+    Route::post('/chat', [ChatBotController::class, 'getBotResponse'])->name('chat');
 
     Route::get('/checkBudget', [BudgetController::class, 'checkBudget']);
 
