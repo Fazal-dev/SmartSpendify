@@ -15,7 +15,7 @@ class ChatBotController extends Controller
             'contents' => [
                 [
                     'parts' => [
-                        ['text' => $request->message]
+                        ['text' => "Your name is Aiva. You are a helpful, friendly assistant. Keep answers short. User says:" . $request->message]
                     ]
                 ]
             ]

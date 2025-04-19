@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SendIcon, Rocket, Sparkles, Bot, User } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ReactMarkdown from "react-markdown";
 
 const ChatUI = ({
     onSendMessage,
@@ -51,14 +52,39 @@ const ChatUI = ({
             if (onSendMessage) {
                 const response = await onSendMessage(input);
 
+                const botMessageId = (Date.now() + 1).toString();
                 const botMessage = {
-                    id: (Date.now() + 1).toString(),
-                    content: response,
+                    id: botMessageId,
+                    content: "",
                     sender: "bot",
                     timestamp: new Date(),
                 };
 
                 setMessages((prev) => [...prev, botMessage]);
+
+                let currentIndex = 0;
+
+                const typeNextCharacter = () => {
+                    if (currentIndex <= response.length) {
+                        setMessages((prev) =>
+                            prev.map((msg) =>
+                                msg.id === botMessageId
+                                    ? {
+                                          ...msg,
+                                          content: response.slice(
+                                              0,
+                                              currentIndex
+                                          ),
+                                      }
+                                    : msg
+                            )
+                        );
+                        currentIndex++;
+                        setTimeout(typeNextCharacter, 20);
+                    }
+                };
+
+                typeNextCharacter();
             }
         } catch (error) {
             console.error("Error sending message:", error);
@@ -104,13 +130,10 @@ const ChatUI = ({
                     <div className="h-8 w-8 rounded-full bg-zinc-800 flex items-center justify-center">
                         <Sparkles className="h-4 w-4 text-white" />
                     </div>
-                    <h3 className="font-semibold text-zinc-100 text-lg">
-                        AI Assistant
+                    <h3 className="font-semibold text-zinc-100 text-lg tracking-tight">
+                        Aiva
                     </h3>
                 </div>
-                {/* <div className="text-sm px-2 py-1 rounded-full bg-zinc-800 text-zinc-400">
-                    {messages.length} messages
-                </div> */}
             </div>
 
             {/* Chat Messages */}
@@ -152,8 +175,11 @@ const ChatUI = ({
                                     )}
                                 >
                                     <div className="break-words leading-relaxed">
-                                        {message.content}
+                                        <ReactMarkdown>
+                                            {message.content}
+                                        </ReactMarkdown>
                                     </div>
+
                                     <span
                                         className={cn(
                                             "text-xs mt-2 self-end",
