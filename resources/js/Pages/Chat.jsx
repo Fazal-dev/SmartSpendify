@@ -11,7 +11,7 @@ export default function Chat() {
             });
 
             // Assuming API returns { reply: "some text" }
-            return response.data.message;
+            return response.data.reply;
         } catch (error) {
             console.error("API error:", error);
             return "Sorry, something went wrong. Please try again.";
