@@ -66,13 +66,19 @@ A full-stack expense management application built with **Laravel** and **React**
     php artisan migrate
     ```
 
-5. Build the React
+5. Install node packages
+
+    ```bash
+    npm i
+    ```
+
+6. Build the React
 
     ```bash
     npm run dev
     ```
 
-6. Start the server
+7. Start the server
     ```bash
     php artisan serve
     ```
